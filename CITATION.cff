@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-title: Papers, Models, and Preprints.
-message: Papers et al from Publications And More.
+title: LL-1.
+message: Machine Learning Model by Ne.app.
 type: software
 authors:
   - given-names: Amlal
@@ -8,12 +8,10 @@ authors:
     email: amlal@ne-app.eu
 identifiers:
   - type: url
-    value: 'https://pub.ne-app.eu'
-    description: Papers, Preprints, and Models
-repository-code: 'https://github.com/publications-and-more/little_learner'
+    value: 'https://blog.ne-app.eu'
+    description: Papers, Preprints, and ML Model of Little Learner 1.
+repository-code: 'https://github.com/publications-and-more/ll-1'
 url: 'https://pub.ne-app.eu'
-abstract: >-
-  This repository contains papers, notes, preprints, and models from Publications And More. Citation is required for usage.
 keywords:
   - cs
   - physics
