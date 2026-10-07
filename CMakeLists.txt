@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.20)
 
-project(LittleLearner
+project(LL_1
   VERSION 1.0.0
   LANGUAGES CXX
   DESCRIPTION "Little Learner — Ne.app formal reasoning ML model"
@@ -17,7 +17,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # default system include path (e.g. -DOCL_INCLUDE_DIR=/path/to/ocl/include).
 set(OCL_INCLUDE_DIR "" CACHE PATH "Path to OCL include directory")
 
-add_library(ll_kernel STATIC
+add_library(ll-1.0 STATIC
   private/src/kernel/src/tactic/construction_solver.cpp
   private/src/kernel/src/tactic/contradiction_solver.cpp
   private/src/kernel/src/solver/dtt_solver.cpp
@@ -28,11 +28,11 @@ add_library(ll_kernel STATIC
 
 # ll_model.hpp includes <ocl/...> in its public interface, so OCL_INCLUDE_DIR
 # must propagate to consumers of ll_kernel as well.
-target_include_directories(ll_kernel PUBLIC
+target_include_directories(ll-1.0 PUBLIC
   private/src/kernel/include
   $<$<BOOL:${OCL_INCLUDE_DIR}>:${OCL_INCLUDE_DIR}>
 )
 
-target_compile_options(ll_kernel PRIVATE
+target_compile_options(ll-1.0 PRIVATE
   $<$<CXX_COMPILER_ID:Clang,GNU>:-Wall -Wextra -Wpedantic>
 )

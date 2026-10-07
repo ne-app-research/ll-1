@@ -28,6 +28,7 @@ bool dtt_solver::check(const std::vector<std::string> &hypotheses,
   for (const auto &h : hypotheses) {
     if (!h.empty() && conclusion.find(h) != std::string::npos)
       return true;
+    
     if (!h.empty() && h.find(conclusion) != std::string::npos)
       return true;
   }

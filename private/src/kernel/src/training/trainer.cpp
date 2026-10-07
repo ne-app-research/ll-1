@@ -14,11 +14,12 @@ static double status_to_loss(const proof_status &s) {
     return 0.0;
   case proof_status::inconclusive:
     return 0.5;
+  case proof_status::unknown:
   case proof_status::refuted:
-    return 1.0;
   case proof_status::pending:
     return 1.0;
   }
+
   return 1.0;
 }
 
@@ -50,10 +51,10 @@ void tensor_param::backprop(const std::vector<double> &flat_grad,
   grad_ij.assign(nij, 0.0);
   grad_ijk.assign(nijk, 0.0);
 
-  std::size_t idx = 0;
-  for (std::size_t a = 0; a < nijk; ++a) {
-    for (std::size_t b = 0; b < nij; ++b) {
-      for (std::size_t c = 0; c < ni; ++c, ++idx) {
+  std::size_t idx{};
+  for (std::size_t a{}; a < nijk; ++a) {
+    for (std::size_t b{}; b < nij; ++b) {
+      for (std::size_t c{}; c < ni; ++c, ++idx) {
         const double g = flat_grad[idx];
         grad_i[c] += g * T_ijk[a] * T_ij[b];
         grad_ij[b] += g * T_ijk[a] * T_i[c];
@@ -69,7 +70,7 @@ void cauchy_optimizer::step(std::vector<double> &theta,
   if (m_velocity_.size() != theta.size())
     m_velocity_.assign(theta.size(), 0.0);
 
-  for (std::size_t i = 0; i < theta.size(); ++i) {
+  for (std::size_t i{}; i < theta.size(); ++i) {
     const double nat_grad = grad[i] / (fisher_diag[i] + 1e-8);
 
     m_velocity_[i] = m_gamma_ * m_velocity_[i] - m_eta_ * nat_grad;
@@ -92,7 +93,7 @@ double trainer::loss_() const {
   if (m_batch_.empty())
     return 1.0;
 
-  double total = 0.0;
+  double total{};
 
   for (const auto &thm : m_batch_) {
     auto result = m_solver_.solve(thm);
@@ -115,19 +116,19 @@ factor_grads_t trainer::factor_grads_(double base_loss) const {
   // returning.
   auto &p = const_cast<tensor_param &>(m_params_);
 
-  for (std::size_t c = 0; c < p.T_i.size(); ++c) {
+  for (std::size_t c{}; c < p.T_i.size(); ++c) {
     p.T_i[c] += eps;
     g.d_i[c] = (loss_() - base_loss) / eps;
     p.T_i[c] -= eps;
   }
 
-  for (std::size_t b = 0; b < p.T_ij.size(); ++b) {
+  for (std::size_t b{}; b < p.T_ij.size(); ++b) {
     p.T_ij[b] += eps;
     g.d_ij[b] = (loss_() - base_loss) / eps;
     p.T_ij[b] -= eps;
   }
 
-  for (std::size_t a = 0; a < p.T_ijk.size(); ++a) {
+  for (std::size_t a{}; a < p.T_ijk.size(); ++a) {
     p.T_ijk[a] += eps;
     g.d_ijk[a] = (loss_() - base_loss) / eps;
     p.T_ijk[a] -= eps;
@@ -149,7 +150,7 @@ double trainer::step() {
 
     std::vector<double> f(g.size());
 
-    for (std::size_t i = 0; i < g.size(); ++i)
+    for (std::size_t i{}; i < g.size(); ++i)
       f[i] = g[i] * g[i];
 
     return f;
@@ -163,7 +164,7 @@ double trainer::step() {
 }
 
 void trainer::train(int epochs) {
-  for (int e = 0; e < epochs; ++e) {
+  for (int e{}; e < epochs; ++e) {
     (void)step();
   }
 }

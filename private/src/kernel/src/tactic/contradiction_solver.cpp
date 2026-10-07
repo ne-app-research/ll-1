@@ -5,6 +5,8 @@
 
 #include <sdk/ll_solver.hpp>
 
+/// @brief In this file, you construct a set of logical formal steps and then prove a conjecture from a contradiction. 
+
 namespace ll {
 
 bool contradiction_solver::find_contradiction(const theorem_params &thm,

@@ -47,7 +47,7 @@ struct machine_model_priv final {
 };
 
 enum class proof_strategy { induction, construction, contradiction, unknown };
-enum class proof_status   { pending, proven, refuted, inconclusive };
+enum class proof_status   { pending, proven, refuted, inconclusive, unknown };
 
 class theorem_params final {
 public:

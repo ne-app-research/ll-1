@@ -33,7 +33,8 @@ bool construction_solver::build_witness(const theorem_params &thm,
 
 std::optional<proof_params>
 construction_solver::solve(const theorem_params &thm) {
-  proof_params out;
+  proof_params out{};
+  
   out.theorem = thm;
   out.add_step("Strategy: construction.");
 
