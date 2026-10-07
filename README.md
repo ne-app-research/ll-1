@@ -1,17 +1,10 @@
 # Little Learner Model
-## Machine Learning & al.
+## Machine Learning Model & al.
 
 ![License](https://img.shields.io/badge/LICENSE-Apache--2.0-blue.svg?style=for-the-badge)
 ![GitHub Repo Stars](https://img.shields.io/github/stars/publications-org/pub?style=for-the-badge)
 
-## Acknowledgments
-
-I would like to thank the people who helped shape the project and review it as well, It matters to me.
-
-## Credits
-
-- Thanks to the people I contacted who took time to proof-read the work, it really means a lot.
-- Citation files are available in the sources as well.
+The LittleLearner-1 by Ne.app. Get started by cloning the repository and installing CMake and Build Essentials.
 
 ## Citing
 
