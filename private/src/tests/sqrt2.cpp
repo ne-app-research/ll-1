@@ -4,6 +4,7 @@
 /// (C) Amlal El Mahrouss
 
 #include <sdk/ll_trainer.hpp>
+#include <ssl/symbols.hpp>
 
 using namespace ll;
 

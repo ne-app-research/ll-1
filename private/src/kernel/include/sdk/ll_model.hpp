@@ -13,6 +13,10 @@
 #include <ocl/math_fwd.hpp>
 #include <ocl/scientific_fwd.hpp>
 
+#ifndef _LL
+#define _LL (0x0115)
+#endif
+
 namespace ll {
 
 struct machine_param_tree final {

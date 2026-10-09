@@ -7,6 +7,7 @@
 
 #include <optional>
 #include <sdk/ll_model.hpp>
+#include <ssl/symbols.hpp>
 
 namespace ll {
 

@@ -85,7 +85,7 @@ trainer::trainer(machine_model_priv &model, solver_base &solver)
   m_params_.T_ijk.assign(4, 0.1);
 }
 
-void trainer::add_theorem(theorem_params thm) {
+void trainer::add_theorem(const theorem_params& thm) {
   m_batch_.push_back(std::move(thm));
 }
 
@@ -103,7 +103,7 @@ double trainer::loss_() const {
   return total / static_cast<double>(m_batch_.size());
 }
 
-factor_grads_t trainer::factor_grads_(double base_loss) const {
+factor_grads_t trainer::factor_grads_(const double& base_loss) const {
   constexpr double eps = 1e-5;
 
   factor_grads_t g;
@@ -137,6 +137,7 @@ factor_grads_t trainer::factor_grads_(double base_loss) const {
   return g;
 }
 
+/// @brief step over the training of the model
 double trainer::step() {
   const double loss = loss_();
 
@@ -156,6 +157,7 @@ double trainer::step() {
     return f;
   };
 
+  /// step over the tensor params.
   m_optim_.step(m_params_.T_i, grads.d_i, make_fisher(grads.d_i));
   m_optim_.step(m_params_.T_ij, grads.d_ij, make_fisher(grads.d_ij));
   m_optim_.step(m_params_.T_ijk, grads.d_ijk, make_fisher(grads.d_ijk));
@@ -163,7 +165,7 @@ double trainer::step() {
   return loss;
 }
 
-void trainer::train(int epochs) {
+void trainer::train(const int& epochs) {
   for (int e{}; e < epochs; ++e) {
     (void)step();
   }
