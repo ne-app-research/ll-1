@@ -12,9 +12,11 @@
 #define _SSL (0x091026)
 #endif
 
-#define SSL_SET_INTEGER "ℤ"
-#define SSL_BELONGS_TO "∈"
-#define SSL_NE "≠"
-#define SSL_EQ "="
-#define SSL_SQR "√"
-#define SSL_SQRT "√"
+#define _SSL_ZFC_NOT "¬"
+#define _SSL_ZFC_NULL "∅"
+#define _SSL_SET_INTEGER "ℤ"
+#define _SSL_BELONGS_TO "∈"
+#define _SSL_NE "≠"
+#define _SSL_EQ "="
+#define _SSL_SQR "√"
+#define _SSL_SQRT "√"
