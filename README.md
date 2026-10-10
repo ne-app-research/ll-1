@@ -6,8 +6,8 @@
 
 The LittleLearner-1 by Ne.app. Get started by cloning the repository and installing CMake and Build Essentials.
 
-## Citing
+## Citing LL-1:
 
-When using the work, please cite it using what's inside the CITATION.cff.
+When using LL-1, please cite it per CITATION.cff's contents.
 
 ##### Copyright (C) Ne.app, all rights reserved, licensed under the Apache License 2.0, see LICENSE.txt
