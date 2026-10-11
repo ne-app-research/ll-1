@@ -1,5 +1,10 @@
 # Little Learner Model
-## Machine Learning Model & al.
+
+## Notice
+
+Prior reading of the code of conduct is required, all tests shall be done locally before a PR gets sent.
+
+## Machine Learning Model
 
 ![License](https://img.shields.io/badge/LICENSE-Apache--2.0-blue.svg?style=for-the-badge)
 ![GitHub Repo Stars](https://img.shields.io/github/stars/publications-org/pub?style=for-the-badge)
