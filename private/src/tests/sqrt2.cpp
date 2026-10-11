@@ -8,7 +8,7 @@
 
 using namespace ll;
 
-int main() {
+int main(int, char**) {
   machine_model_priv model;
   induction_solver solver;
 
