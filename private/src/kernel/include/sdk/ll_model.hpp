@@ -5,21 +5,29 @@
 
 #pragma once
 
+#include <ocl/scientific_fwd.hpp>
+#include <ocl/asio_fwd.hpp>
+#include <ocl/math_fwd.hpp>
+#include <ocl/asio.hpp>
 #include <filesystem>
 #include <string>
 #include <vector>
-#include <ocl/asio.hpp>
-#include <ocl/asio_fwd.hpp>
-#include <ocl/math_fwd.hpp>
-#include <ocl/scientific_fwd.hpp>
 
 #ifndef _LL
 #define _LL (0x0115)
 #endif
 
+#ifndef _LL_API
+#ifdef _MSC_VER
+#define _LL_API __dllspec(dllexport)
+#else
+#define _LL_API __attribute__((visibility("default")))
+#endif
+#endif
+
 namespace ll {
 
-struct machine_param_tree final {
+struct _LL_API machine_param_tree final {
   machine_param_tree() = default;
 
   std::string label{};
@@ -31,7 +39,7 @@ struct machine_param_tree final {
   machine_param_tree *right{};
 };
 
-struct machine_model_priv final {
+struct _LL_API machine_model_priv final {
   machine_model_priv() = default;
   ~machine_model_priv() = default;
 
@@ -53,7 +61,7 @@ struct machine_model_priv final {
 enum class proof_strategy { induction, construction, contradiction, unknown };
 enum class proof_status   { pending, proven, refuted, inconclusive, unknown };
 
-class theorem_params final {
+class _LL_API theorem_params final {
 public:
   std::string              name{};
   std::vector<std::string> hypotheses{};
@@ -61,7 +69,7 @@ public:
   proof_strategy           strategy{ proof_strategy::unknown };
 };
 
-class proof_params final {
+class _LL_API proof_params final {
 public:
   theorem_params            theorem{};
   std::vector<std::string>  steps{};
@@ -70,20 +78,20 @@ public:
   void add_step(std::string s) { steps.push_back(std::move(s)); }
 };
 
-class definition_params final {
+class _LL_API definition_params final {
 public:
   std::string name{};
   std::string body{};
 };
 
-class corollary_params final {
+class _LL_API corollary_params final {
 public:
   std::string name{};
   std::string derived_from{};   // theorem name this follows from
   std::string statement{};
 };
 
-class conjecture_params final {
+class _LL_API conjecture_params final {
 public:
   std::string name{};
   std::string statement{};
@@ -92,7 +100,7 @@ public:
 
 // Dependent Type Theory checker: verifies that a proof term is well-typed
 // under the hypotheses (i.e., the conclusion is inhabited).
-class dtt_solver final {
+class _LL_API dtt_solver final {
 public:
   // Returns true when `conclusion` is derivable from `hypotheses` under DTT.
   bool check(const std::vector<std::string> &hypotheses,
@@ -101,7 +109,7 @@ public:
 
 // ZFC set-theory validator: checks set-membership and subset relations
 // declared inside proof steps.
-class zfc_set_solver final {
+class _LL_API zfc_set_solver final {
 public:
   // Returns true when the set expression `expr` is consistent with the axioms.
   bool validate(const std::string &expr) const;

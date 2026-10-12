@@ -5,14 +5,14 @@
 
 #pragma once
 
-#include <optional>
 #include <sdk/ll_model.hpp>
-#include <ssl/symbols.hpp>
+#include <ssl/sl_symbol.hpp>
+#include <optional>
 
 namespace ll {
 
 // Base interface every proof solver implements.
-class solver_base {
+class _LL_API solver_base {
 public:
   virtual ~solver_base() = default;
 
@@ -22,7 +22,7 @@ public:
 };
 
 // Proof by induction.
-class induction_solver final : public solver_base {
+class _LL_API induction_solver final : public solver_base {
 public:
   std::optional<proof_params> solve(const theorem_params &thm) override;
 
@@ -34,7 +34,7 @@ private:
 };
 
 // Proof by construction — finds a witness satisfying the conclusion.
-class construction_solver final : public solver_base {
+class _LL_API construction_solver final : public solver_base {
 public:
   std::optional<proof_params> solve(const theorem_params &thm) override;
 
@@ -46,7 +46,7 @@ private:
 };
 
 // Proof by contradiction — assumes ¬conclusion and derives a contradiction.
-class contradiction_solver final : public solver_base {
+class _LL_API contradiction_solver final : public solver_base {
 public:
   std::optional<proof_params> solve(const theorem_params &thm) override;
 
