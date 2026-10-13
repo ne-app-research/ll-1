@@ -27,6 +27,7 @@ bool contradiction_solver::find_contradiction(const theorem_params &thm,
 
   /// Thus if CONTRADICTION ON THEOREM, THUS QED.
   out.add_step("Therefore '" + thm.conclusion + "' holds. QED.");
+  
   return true;
 }
 

@@ -1,19 +1,19 @@
 #! /bin/sh
 
-## To be used for curl -fsSL https://install.amlal.nekernel.org | sh
+## To be used for curl -fsSL https://install.ll.nekernel.org | sh
 
 echo "==> PUB: DOWNLOADING REPOSITORY..."
 
-ORG=publications-org
+ORG=ne-app-research
 PROFILE=release
 
 MKDIR=mkdir
 
-SRC=pub
+SRC=ll-1.5
 VCS=git
 FLAGS=clone --recurse-submodules -j8
-DIST=pub-${ORG}-${PROFILE}
+DIST=ll-${ORG}-${PROFILE}
 
 ${MKDIR} ${DIST}
 
-${GIT} ${FLAGS} https://github.com/publications-org/${SRC}.git ${DIST}/${SRC}
+${GIT} ${FLAGS} https://github.com/ne-app-research/${SRC}.git ${DIST}/${SRC}

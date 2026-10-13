@@ -7,6 +7,9 @@
 
 namespace ll {
 
+/// @brief invalid tensor size alias.
+using invalid_tensor_size = std::invalid_argument;
+
 /// @note this should have more granularity.
 static double status_to_loss(const proof_status &s) {
   switch (s) {
@@ -23,6 +26,8 @@ static double status_to_loss(const proof_status &s) {
   return 1.0;
 }
 
+// --------------------------------------------------------------------
+
 std::vector<double> tensor_param::fold() const {
   std::vector<double> out;
   out.reserve(T_i.size() * T_ij.size() * T_ijk.size());
@@ -34,8 +39,6 @@ std::vector<double> tensor_param::fold() const {
 
   return out;
 }
-
-using invalid_tensor_size = std::invalid_argument;
 
 void tensor_param::backprop(const std::vector<double> &flat_grad,
                             std::vector<double> &grad_i,
@@ -66,6 +69,8 @@ void tensor_param::backprop(const std::vector<double> &flat_grad,
   }
 }
 
+// --------------------------------------------------------------------
+
 void cauchy_optimizer::step(std::vector<double> &theta,
                             const std::vector<double> &grad,
                             const std::vector<double> &fisher_diag) {
@@ -79,6 +84,8 @@ void cauchy_optimizer::step(std::vector<double> &theta,
     theta[i] += m_velocity_[i];
   }
 }
+
+// --------------------------------------------------------------------
 
 basic_trainer::basic_trainer(machine_model_priv &model, solver_base &solver)
     : m_model_(model), m_solver_(solver) {
