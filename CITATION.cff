@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: LL-1.
+title: LL-M.
 message: Machine Learning Model by Ne.app.
 type: software
 authors:
@@ -9,15 +9,16 @@ authors:
 identifiers:
   - type: url
     value: 'https://blog.ne-app.eu'
-    description: Papers, Preprints, and ML Model of Little Learner 1.
-repository-code: 'https://github.com/publications-and-more/ll-1'
-url: 'https://pub.ne-app.eu'
+    description: Papers, Preprints, and ML Model of LL-M.
+repository-code: 'https://github.com/ne-app-research/ll-m'
+url: 'https://blog.ne-app.eu'
 keywords:
   - cs
   - physics
   - mathematics
   - abstract-algebra
   - differential-geometry
+  - riemmanian-geometry
   - topology
   - machine-learning
   - differential-equations
