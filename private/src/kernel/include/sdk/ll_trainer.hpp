@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include <sdk/ll_model.hpp>
 #include <sdk/ll_solver.hpp>
+#include <sdk/ll_model.hpp>
 #include <vector>
 
 namespace ll {
@@ -22,7 +22,7 @@ const inline double LEARNING_RATE = 1e-3;
 // ⟨P⟩ = ∫_{P_{S,F}} F_t dV = T_i ⊗ T_ij ⊗ T_ijk  (Fubini decomposition).
 // Each level corresponds to one depth of machine_param_tree (leaf → mid →
 // root).
-struct tensor_param final {
+struct _LL_API tensor_param final {
   tensor_param() = default;
   ~tensor_param() = default;
 
@@ -51,7 +51,7 @@ struct tensor_param final {
 //   θ_{t+1} = θ_t + v_{t+1}
 // G⁻¹ is the inverse Fisher metric supplied by the caller (diagonal
 // approximation).
-struct cauchy_optimizer final {
+struct _LL_API cauchy_optimizer final {
   cauchy_optimizer() = default;
 
   double m_eta_{detail::constants::LEARNING_RATE}; // learning rate
@@ -65,7 +65,7 @@ struct cauchy_optimizer final {
 };
 
 // Factor-level gradients produced by finite difference on the solver signal.
-struct factor_grads_t final {
+struct _LL_API factor_grads_t final {
   std::vector<double> d_i{};
   std::vector<double> d_ij{};
   std::vector<double> d_ijk{};
@@ -73,17 +73,17 @@ struct factor_grads_t final {
 
 // Drives one training epoch: evaluate solver loss → factor gradients →
 // natural-gradient Cauchy step on each factor vector.
-class trainer final {
+class _LL_API basic_trainer final {
 public:
-  explicit trainer(machine_model_priv &model, solver_base &solver);
+  explicit basic_trainer(machine_model_priv &model, solver_base &solver);
 
-  ~trainer() = default;
+  ~basic_trainer() = default;
 
-  trainer(const trainer &) = delete;
-  trainer &operator=(const trainer &) = delete;
+  basic_trainer(const basic_trainer &) = delete;
+  basic_trainer &operator=(const basic_trainer &) = delete;
 
-  trainer(trainer &&) = delete;
-  trainer &operator=(trainer &&) = delete;
+  basic_trainer(basic_trainer &&) = delete;
+  basic_trainer &operator=(basic_trainer &&) = delete;
 
   void add_theorem(const theorem_params &thm);
 

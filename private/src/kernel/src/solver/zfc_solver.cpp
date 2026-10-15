@@ -4,13 +4,14 @@
 /// (C) Amlal El Mahrouss
 
 #include <sdk/ll_model.hpp>
+#include <ssl/sl_symbol.hpp>
 
 #ifndef NE_ZFC_NOT
-#define NE_ZFC_NOT "¬"
+#define NE_ZFC_NOT _SSL_ZFC_NOT
 #endif
 
 #ifndef NE_ZFC_NULL
-#define NE_ZFC_NULL "∅"
+#define NE_ZFC_NULL _SSL_ZFC_NULL
 #endif
 
 namespace ll {

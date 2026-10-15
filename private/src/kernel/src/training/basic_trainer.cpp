@@ -7,6 +7,9 @@
 
 namespace ll {
 
+/// @brief invalid tensor size alias.
+using invalid_tensor_size = std::invalid_argument;
+
 /// @note this should have more granularity.
 static double status_to_loss(const proof_status &s) {
   switch (s) {
@@ -22,6 +25,8 @@ static double status_to_loss(const proof_status &s) {
 
   return 1.0;
 }
+
+// --------------------------------------------------------------------
 
 std::vector<double> tensor_param::fold() const {
   std::vector<double> out;
@@ -44,7 +49,7 @@ void tensor_param::backprop(const std::vector<double> &flat_grad,
   const std::size_t nijk = T_ijk.size();
 
   if (flat_grad.size() != ni * nij * nijk)
-    throw std::invalid_argument(
+    throw invalid_tensor_size(
         "flat_grad size does not match tensor dimensions");
 
   grad_i.assign(ni, 0.0);
@@ -64,6 +69,8 @@ void tensor_param::backprop(const std::vector<double> &flat_grad,
   }
 }
 
+// --------------------------------------------------------------------
+
 void cauchy_optimizer::step(std::vector<double> &theta,
                             const std::vector<double> &grad,
                             const std::vector<double> &fisher_diag) {
@@ -78,18 +85,20 @@ void cauchy_optimizer::step(std::vector<double> &theta,
   }
 }
 
-trainer::trainer(machine_model_priv &model, solver_base &solver)
+// --------------------------------------------------------------------
+
+basic_trainer::basic_trainer(machine_model_priv &model, solver_base &solver)
     : m_model_(model), m_solver_(solver) {
   m_params_.T_i.assign(2, 0.1);
   m_params_.T_ij.assign(4, 0.1);
   m_params_.T_ijk.assign(4, 0.1);
 }
 
-void trainer::add_theorem(const theorem_params& thm) {
+void basic_trainer::add_theorem(const theorem_params& thm) {
   m_batch_.push_back(std::move(thm));
 }
 
-double trainer::loss_() const {
+double basic_trainer::loss_() const {
   if (m_batch_.empty())
     return 1.0;
 
@@ -103,7 +112,7 @@ double trainer::loss_() const {
   return total / static_cast<double>(m_batch_.size());
 }
 
-factor_grads_t trainer::factor_grads_(const double& base_loss) const {
+factor_grads_t basic_trainer::factor_grads_(const double& base_loss) const {
   constexpr double eps = 1e-5;
 
   factor_grads_t g;
@@ -138,10 +147,8 @@ factor_grads_t trainer::factor_grads_(const double& base_loss) const {
 }
 
 /// @brief step over the training of the model
-double trainer::step() {
+double basic_trainer::step() {
   const double loss = loss_();
-
-  (void)loss;
 
   const auto grads = factor_grads_(loss);
 
@@ -165,9 +172,9 @@ double trainer::step() {
   return loss;
 }
 
-void trainer::train(const int& epochs) {
-  for (int e{}; e < epochs; ++e) {
-    (void)step();
+void basic_trainer::train(const int& epochs) {
+  for (std::int32_t e{}; e < epochs; ++e) {
+    if (step() == e) break;
   }
 }
 

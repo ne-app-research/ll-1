@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include <ocl/math_fwd.hpp>
 #include <ocl/scientific_fwd.hpp>
+#include <ocl/math_fwd.hpp>
 
 #ifndef _SSL
 #define _SSL (0x091026)
