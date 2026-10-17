@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2026, Amlal El Mahrouss.
-
-/// (C) Amlal El Mahrouss
+// Copyright 2026, Ne.app.
 
 #include <sdk/ll_trainer.hpp>
 
